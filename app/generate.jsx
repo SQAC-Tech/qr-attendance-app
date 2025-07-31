@@ -6,12 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function GenerateQR() {
+  const [name, setName] = useState('');
   const [regno, setRegNo] = useState('');
-  const [roll, setRoll] = useState('');
+  const [eventid, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
   const router = useRouter();
   const navigation = useNavigation();
-  const data = JSON.stringify({ regno, roll });
+  const data = JSON.stringify({ name ,regno, eventid });
 
 
 
@@ -23,11 +24,19 @@ export default function GenerateQR() {
       
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <Text style={styles.title}>🎯 Generate Your QR Code</Text>
+      <Text style={styles.title}>Generate Your QR Code</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Enter your registration number"
+        placeholder="Enter your Name"
+        placeholderTextColor="#888"
+        value={name}
+        onChangeText={setName}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your registration Number"
         placeholderTextColor="#888"
         value={regno}
         onChangeText={setRegNo}
@@ -35,10 +44,10 @@ export default function GenerateQR() {
 
       <TextInput
         style={styles.input}
-        placeholder="Enter Event roll number"
+        placeholder="Enter Event Roll Number"
         placeholderTextColor="#888"
-        value={roll}
-        onChangeText={setRoll}
+        value={eventid}
+        onChangeText={setEventId}
         keyboardType="numeric"
       />
 
@@ -47,7 +56,7 @@ export default function GenerateQR() {
         onPress={() => {
           setShowQR(true);
         }}
-        disabled={!regno || !roll}
+        disabled={!name || !regno || !eventid}
       >
         <Text style={styles.buttonText}>Generate QR</Text>
       </TouchableOpacity>
