@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "qr-attendance",
-    "slug": "qr-attendance",
+    "name": "sqac-qr-attendance",
+    "slug": "sqac-qr-attendance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
