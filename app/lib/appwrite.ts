@@ -1,14 +1,15 @@
-import { Account, Client, ID } from 'appwrite';
+import { Account, Client, Databases, ID } from 'appwrite';
 
 const client = new Client();
 
 client
   .setEndpoint('https://fra.cloud.appwrite.io/v1') // replace if using self-hosted
-  .setProject('68890bd400275c628b76'); // ⬅️ Replace with your actual Appwrite project ID
+  .setProject('68890bd400275c628b76'); // your actual Appwrite project ID
 
 const account = new Account(client);
+const databases = new Databases(client); // ⬅️ This is what's missing
 
-// ✅ Export this to use elsewhere
+// ✅ Auth Functions
 export async function getCurrentSession(): Promise<boolean> {
   try {
     const session = await account.getSession('current');
@@ -30,5 +31,5 @@ export async function logout() {
   return account.deleteSession('current');
 }
 
-// Also export `account` and `client` if needed
-export { account, client };
+// ✅ Export everything needed
+export { account, client, databases, ID };
