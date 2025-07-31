@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { Link, useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function GenerateQR() {
   const [regno, setRegNo] = useState('');
   const [roll, setRoll] = useState('');
   const [showQR, setShowQR] = useState(false);
-
+  const router = useRouter();
+  const navigation = useNavigation();
   const data = JSON.stringify({ regno, roll });
 
-  
+
 
   return (
     <KeyboardAvoidingView
@@ -47,6 +51,14 @@ export default function GenerateQR() {
       >
         <Text style={styles.buttonText}>Generate QR</Text>
       </TouchableOpacity>
+
+      <Link href="/" asChild>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Back to Home</Text>
+              </TouchableOpacity>
+      </Link>
+
+      
 
       {showQR && (
         <View style={styles.qrContainer}>
