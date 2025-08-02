@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet ,Button} from 'react-native';
-import { databases, ID } from './lib/appwrite'; // Make sure 'databases' is an instance of Databases
+import { databases, ID } from './lib/appwrite'; 
 import { Link, useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 

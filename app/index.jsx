@@ -28,7 +28,7 @@ export default function HomeScreen() {
 
       <Link href="/scan" asChild>
         <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText}>📷 Scan QR (Admin)</Text>
+          <Text style={styles.buttonText}>📷 Scan QR</Text>
         </TouchableOpacity>
       </Link>
 

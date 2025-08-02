@@ -10,29 +10,49 @@ export default function ScanScreen() {
   const [scanned, setScanned] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [statusType, setStatusType] = useState<'success' | 'error' | ''>('');
-  const { markAttended } = useAttendeeStore();
+  const { attendees, fetchAttendees, markAttended } = useAttendeeStore();
   const router = useRouter();
 
   useEffect(() => {
     if (!permission?.granted) requestPermission();
+    fetchAttendees();
   }, []);
 
-  const handleBarCodeScanned = ({ data }: { data: string }) => {
+  const handleBarCodeScanned = async ({ data }: { data: string }) => {
     if (scanned) return;
-
     setScanned(true);
 
     try {
       const parsed = JSON.parse(data);
-      if (!parsed.regno || !parsed.name) throw new Error('Invalid QR');
+      const { regno, name, event_id } = parsed;
 
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      markAttended(parsed.regno);
-      setStatusMessage(`✅ Marked: ${parsed.regno}`);
-      setStatusType('success');
+      if (!regno || !name || !event_id) throw new Error('Invalid QR');
+
+      const matched = attendees.find(
+        (a) =>
+          a.regno.toLowerCase() === regno.toLowerCase() &&
+          a.name.toLowerCase() === name.toLowerCase() &&
+          a.event_id.toLowerCase() === event_id.toLowerCase()
+      );
+
+      if (!matched) {
+        await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        setStatusMessage('❌ Attendee not found');
+        setStatusType('error');
+      } else if (matched.marked) {
+        await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+        setStatusMessage(`⚠️ Already marked: ${matched.name}`);
+        setStatusType('error');
+      } else {
+        await markAttended(regno);
+        await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        setStatusMessage(`✅ Marked: ${matched.name}`);
+        setStatusType('success');
+      }
     } catch (error) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      setStatusMessage(`❌ Invalid QR`);
+      console.error(error);
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      setStatusMessage('❌ Invalid QR Code');
       setStatusType('error');
     }
 
@@ -47,16 +67,27 @@ export default function ScanScreen() {
     return <Text>No camera permission</Text>;
   }
 
+  const getBorderColor = () => {
+    if (statusType === 'success') return '#28a745'; // green
+    if (statusType === 'error') return '#dc3545'; // red
+    return '#007AFF'; // blue (default)
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.cameraBox}>
+      <View style={[styles.cameraBox, { borderColor: getBorderColor() }]}>
         <CameraView
           style={styles.camera}
           onBarcodeScanned={handleBarCodeScanned}
           barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
         />
         {statusMessage !== '' && (
-          <View style={[styles.feedbackOverlay, statusType === 'success' ? styles.success : styles.error]}>
+          <View
+            style={[
+              styles.feedbackOverlay,
+              statusType === 'success' ? styles.success : styles.error,
+            ]}
+          >
             <Text style={styles.feedbackText}>{statusMessage}</Text>
           </View>
         )}
@@ -71,67 +102,58 @@ export default function ScanScreen() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1F28',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    backgroundColor: '#1E1F28',
   },
   cameraBox: {
-    width: 250,
-    height: 250,
-    borderWidth: 3,
-    borderColor: '#00FF00',
-    borderRadius: 12,
+    width: 200,
+    height: 200,
+    borderWidth: 4,
+    borderRadius: 10,
     overflow: 'hidden',
-    marginBottom: 20,
-    position: 'relative',
+    marginBottom: 10,
   },
   camera: {
     flex: 1,
   },
-  feedbackOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#000000aa',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  feedbackText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    padding: 10,
-  },
-  success: {
-    backgroundColor: 'rgba(0, 180, 0, 0.7)',
-  },
-  error: {
-    backgroundColor: 'rgba(180, 0, 0, 0.7)',
-  },
   instruction: {
-    color: '#fff',
-    marginBottom: 30,
+    marginTop: 10,
     fontSize: 16,
-    backgroundColor: '#333',
-    padding: 10,
-    borderRadius: 10,
+    color: '#eee',
   },
   button: {
+    marginTop: 30,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     backgroundColor: '#007AFF',
-    paddingVertical: 14,
-    paddingHorizontal: 30,
-    borderRadius: 12,
-    marginTop: 10,
+    borderRadius: 5,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+  },
+  feedbackOverlay: {
+    position: 'absolute',
+    top: '40%',
+    left: '5%',
+    right: '5%',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  success: {
+    backgroundColor: '#28a745',
+  },
+  error: {
+    backgroundColor: '#dc3545',
+  },
+  feedbackText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });

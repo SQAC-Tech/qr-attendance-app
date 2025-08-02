@@ -8,11 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 export default function GenerateQR() {
   const [name, setName] = useState('');
   const [regno, setRegNo] = useState('');
-  const [eventid, setEventId] = useState('');
+  const [event_id, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
   const router = useRouter();
   const navigation = useNavigation();
-  const data = JSON.stringify({ name ,regno, eventid });
+  const data = JSON.stringify({ name ,regno, event_id });
 
 
 
@@ -46,9 +46,9 @@ export default function GenerateQR() {
         style={styles.input}
         placeholder="Enter Event Roll Number"
         placeholderTextColor="#888"
-        value={eventid}
+        value={event_id}
         onChangeText={setEventId}
-        keyboardType="numeric"
+        keyboardType="default"
       />
 
       <TouchableOpacity
@@ -56,7 +56,7 @@ export default function GenerateQR() {
         onPress={() => {
           setShowQR(true);
         }}
-        disabled={!name || !regno || !eventid}
+        disabled={!name || !regno || !event_id}
       >
         <Text style={styles.buttonText}>Generate QR</Text>
       </TouchableOpacity>
