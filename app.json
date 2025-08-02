@@ -21,7 +21,13 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/sqac_logo.png"
+      "favicon": "./assets/images/sqac_logo.png",
+      "name": "QR Attendance",
+      "shortName": "QR App",
+      "themeColor": "#ffffff",
+      "backgroundColor": "#ffffff",
+      "orientation": "portrait",
+      "display": "standalone"
     },
     "plugins": [
       "expo-router",
