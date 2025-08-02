@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
-import { account, login, signup } from './lib/appwrite';
+import { login, signup } from './lib/appwrite';
 
 export default function AuthScreen() {
   const router = useRouter();
@@ -24,15 +24,22 @@ export default function AuthScreen() {
         await login(email, password);
       } else {
         await signup(email, password, name);
-        await login(email, password);
+        await login(email, password); // Auto-login after signup
       }
 
-      router.replace('/');
-    } catch (err) {
-      if (err instanceof Error) {
-        Alert.alert('Error', err.message);
+      router.replace('/'); // Redirect to Home
+    } catch (err: any) {
+      const message = err?.message || 'Something went wrong';
+
+      if (message.includes('A user with the same userId or email already exists')) {
+        Alert.alert('Account Exists', 'This email is already registered. Please log in instead.');
+        setIsLogin(true);
+      } else if (message.includes('Invalid credentials')) {
+        Alert.alert('Login Failed', 'Incorrect email or password.');
+      } else if (message.includes('Invalid email')) {
+        Alert.alert('Invalid Email', 'Please enter a valid email address.');
       } else {
-        Alert.alert('Error', 'Something went wrong');
+        Alert.alert('Error', message);
       }
     }
   };
@@ -59,12 +66,14 @@ export default function AuthScreen() {
             style={styles.input}
           />
         )}
+
         <TextInput
           label="Email"
           value={email}
           onChangeText={setEmail}
           mode="outlined"
           keyboardType="email-address"
+          autoCapitalize="none"
           style={styles.input}
         />
         <TextInput
