@@ -1,50 +1,85 @@
-# Welcome to your Expo app 👋
+# QR Attendance App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to the **QR Attendance App**, a universal React Native application built using [Expo Router](https://expo.dev/router). This app streamlines event attendance by scanning QR codes containing participant details and marking them locally — no server required!
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
+- ✅ **QR Code Scanning** – Scan QR codes using your phone's camera.
+- 👤 **Local Matching** – Match scanned data (`name`, `regno`, `event_id`) against a locally stored attendee list.
+- 🔐 **Appwrite Authentication** – Sign up and log in securely with Appwrite.
+- 🌐 **PWA Support** – Installable as a web app with "Add to Home Screen" functionality.
+- 🧭 **Expo Router Navigation** – Organized using file-based routing.
+- 📄 **Attendance Log** – View scanned and marked attendees within the app.
+
+---
+## These are some of the demo images of the app.
+<p align="left">
+  <img src="assets/images/sign_in.jpeg" width="190"/>
+  <img src="assets/images/sign_up.jpeg" width="190"/>
+  <img src="assets/images/home.jpeg" width="190"/>
+</p>
+<p align="left">
+  <img src="assets/images/generate.jpeg" width="190"/>
+  <img src="assets/images/scan.jpeg" width="190"/>
+  <img src="assets/images/attendance.jpeg" width="190"/>
+</p>
+
+
+---
+
+
+## 🛠️ Getting Started
+
+1. **Install dependencies**
+```bash
    npm install
-   ```
-
-2. Start the app
-
-   ```bash
+```
+2. Run the app
+  ```bash
    npx expo start
-   ```
+  ```
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Then choose how to open the app:
+- 🤳 Scan QR with Expo Go
+- 📱 Android or iOS Simulator
+- 🌐 Open in Web Browser (for PWA)
 
-## Get a fresh project
+---
 
-When you're ready, run:
 
+
+## 📁 Project Structure
+This project uses Expo Router for navigation. All screens and logic are located in the app/ directory. Auth, scanning, and attendance logic are modular and reusable.
+
+---
+
+
+## 🧼 Reset Starter Code
+To reset the app to a blank slate:
 ```bash
 npm run reset-project
 ```
+This will move starter code to app-example/ and provide a clean app/ folder.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📚 Learn More
+- 📖 [Expo Documentation](https://docs.expo.dev)
+- 🧭 [Expo Router](https://expo.dev/router)
+- 📷 [Expo Camera](https://docs.expo.dev/versions/latest/sdk/camera/)
+- 🔐 [Appwrite Docs](https://appwrite.io/docs)
+- 🌐 [PWA in Expo](https://docs.expo.dev/workflow/pwa/)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 💬 Community & Support
+- [Expo on GitHub](https://github.com/expo/expo)
+- [Expo Discord](https://discord.com/invite/expo)
+- [Appwrite Discord](https://discord.com/invite/GSeTUeA)
