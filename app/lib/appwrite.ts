@@ -3,11 +3,11 @@ import { Account, Client, Databases, ID } from 'appwrite';
 const client = new Client();
 
 client
-  .setEndpoint('https://fra.cloud.appwrite.io/v1') // replace if using self-hosted
-  .setProject('68890bd400275c628b76'); // your actual Appwrite project ID
+  .setEndpoint('https://fra.cloud.appwrite.io/v1') 
+  .setProject('68890bd400275c628b76'); 
 
 const account = new Account(client);
-const databases = new Databases(client); // ⬅️ This is what's missing
+const databases = new Databases(client);
 
 // ✅ Auth Functions
 export async function getCurrentSession(): Promise<boolean> {

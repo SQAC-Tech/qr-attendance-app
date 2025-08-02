@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator , TouchableOpacity} from 'react-native';
-import { databases } from './lib/appwrite'; // adjust path if needed
-import { Link, useRouter } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { databases } from './lib/appwrite'; 
+import { Link } from 'expo-router';
+import { useAttendeeStore } from './store/attendeeStore';
 
 const DATABASE_ID = '688bbe51002e8b914a71';
 const COLLECTION_ID = '688bc48f000adba743bb';
 
 export default function AttendeesScreen() {
-
-  const router = useRouter();
-  const navigation = useNavigation();
-
-  const [attendees, setAttendees] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { attendees, setAttendees } = useAttendeeStore();
+  const [loading, setLoading] = React.useState(true);
 
   const fetchAttendees = async () => {
     try {
       const res = await databases.listDocuments(DATABASE_ID, COLLECTION_ID);
-      setAttendees(res.documents);
+      setAttendees(
+        res.documents.map((doc: any) => ({
+          name: doc.name,
+          regno: doc.regno,
+          event_id: doc.event_id,
+          marked: doc.marked, // include this if Attendee type has 'marked'
+        }))
+      );
     } catch (error) {
       console.error("Failed to fetch attendees:", error);
     } finally {
@@ -31,7 +34,7 @@ export default function AttendeesScreen() {
   }, []);
 
   const renderItem = ({ item }: { item: any }) => (
-    <View style={styles.card}>
+    <View style={[styles.card, item.marked && { backgroundColor: '#28a745' }]}> 
       <Text style={styles.details}>{item.name}</Text>
       <Text style={styles.details}>Reg No: {item.regno}</Text>
       <Text style={styles.details}>Event ID: {item.event_id}</Text>
@@ -43,23 +46,19 @@ export default function AttendeesScreen() {
   }
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.title}></Text>
-        <Text style={styles.title}>Attendees List</Text>
-        <FlatList
-          data={attendees}
-          keyExtractor={(item) => item.$id}
-          renderItem={renderItem}
-        />
-        <Link href="/" asChild>
+    <View style={styles.container}>
+      <Text style={styles.title}>Attendees List</Text>
+      <FlatList
+        data={attendees}
+        keyExtractor={(item) => item.name}
+        renderItem={renderItem}
+      />
+      <Link href="/" asChild>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Back to Home</Text>
         </TouchableOpacity>
       </Link>
-      </View>
-      
-    </>
+    </View>
   );
 }
 
@@ -82,4 +81,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
