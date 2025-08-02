@@ -79,7 +79,11 @@ export default function AuthScreen() {
           {isLogin ? 'Login' : 'Register'}
         </Button>
 
-        <Button mode="text" onPress={() => setIsLogin(!isLogin)}>
+        <Button
+          mode="text"
+          onPress={() => setIsLogin(!isLogin)}
+          labelStyle={styles.buttonText}
+        >
           {isLogin ? 'No account? Sign Up' : 'Already have an account? Sign In'}
         </Button>
       </View>
@@ -109,6 +113,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
+    backgroundColor: '#ffa600ff',
+  },
+  buttonText: {
+    color: '#ffa600ff',
   },
   logo: {
     width: 150,
