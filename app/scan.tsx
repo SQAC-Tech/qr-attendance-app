@@ -1,9 +1,11 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useAttendeeStore } from './store/attendeeStore';
 import { useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+import WebQRScanner from './webQRScanner';
 
 export default function ScanScreen() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -14,11 +16,11 @@ export default function ScanScreen() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!permission?.granted) requestPermission();
+    if (Platform.OS !== 'web' && !permission?.granted) requestPermission();
     fetchAttendees();
   }, []);
 
-  const handleBarCodeScanned = async ({ data }: { data: string }) => {
+  const handleScannedData = async (data: string) => {
     if (scanned) return;
     setScanned(true);
 
@@ -63,24 +65,29 @@ export default function ScanScreen() {
     }, 2000);
   };
 
-  if (!permission?.granted) {
+  const getBorderColor = () => {
+    if (statusType === 'success') return '#28a745';
+    if (statusType === 'error') return '#dc3545';
+    return '#007AFF';
+  };
+
+  if (Platform.OS !== 'web' && !permission?.granted) {
     return <Text>No camera permission</Text>;
   }
-
-  const getBorderColor = () => {
-    if (statusType === 'success') return '#28a745'; // green
-    if (statusType === 'error') return '#dc3545'; // red
-    return '#007AFF'; // blue (default)
-  };
 
   return (
     <View style={styles.container}>
       <View style={[styles.cameraBox, { borderColor: getBorderColor() }]}>
-        <CameraView
-          style={styles.camera}
-          onBarcodeScanned={handleBarCodeScanned}
-          barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
-        />
+        {Platform.OS === 'web' ? (
+          <WebQRScanner onResult={handleScannedData} />
+        ) : (
+          <CameraView
+            style={styles.camera}
+            onBarcodeScanned={({ data }) => handleScannedData(data)}
+            barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
+          />
+        )}
+
         {statusMessage !== '' && (
           <View
             style={[
