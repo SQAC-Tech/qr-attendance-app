@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/sqac_logo.png",
+        "foregroundImage": "./public/icon-192.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
@@ -21,7 +21,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/sqac_logo.png",
+      "favicon": "./public/icon-192.png",
       "name": "QR Attendance",
       "shortName": "QR App",
       "themeColor": "#ffffff",
@@ -34,7 +34,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./public/icon-192.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
