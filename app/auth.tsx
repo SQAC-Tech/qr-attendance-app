@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
-import { login, signup } from './lib/appwrite';
+import { login, signup } from './lib/firebaseAuth';
 
 export default function AuthScreen() {
   const router = useRouter();

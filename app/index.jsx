@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Image, Alert } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import { logout } from './lib/appwrite';
+import { logout } from './lib/firebaseAuth'; // Adjust the import based on your auth library
 
 export default function HomeScreen() {
   const router = useRouter();
