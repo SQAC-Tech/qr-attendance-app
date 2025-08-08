@@ -16,14 +16,14 @@ Welcome to the **QR Attendance App**, a universal React Native application built
 ---
 ## These are some of the demo images of the app.
 <p align="left">
-  <img src="assets/images/sign_in.jpeg" width="190"/>
-  <img src="assets/images/sign_up.jpeg" width="190"/>
-  <img src="assets/images/home.jpeg" width="190"/>
+  <img src="" width="190"/>
+  <img src="" width="190"/>
+  <img src="" width="190"/>
 </p>
 <p align="left">
-  <img src="assets/images/generate.jpeg" width="190"/>
-  <img src="assets/images/scan.jpeg" width="190"/>
-  <img src="assets/images/attendance.jpeg" width="190"/>
+  <img src="" width="190"/>
+  <img src="" width="190"/>
+  <img src="" width="190"/>
 </p>
 
 

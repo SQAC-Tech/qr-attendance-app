@@ -1,6 +1,6 @@
 {
-  "name": "SQAC QR Attendance",
-  "short_name": "SQAC",
+  "name": "10X QR Attendance",
+  "short_name": "10X",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

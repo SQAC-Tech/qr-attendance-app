@@ -17,8 +17,8 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <Image source={require('../assets/images/sqac_logo.png')} style={styles.logo} resizeMode="contain" />
-      <Text style={styles.title}>SQAC QR Attendance</Text>
+      <Image source={require('../assets/images/10X_logo.png')} style={styles.logo} resizeMode="contain" />
+      <Text style={styles.title}>QR ATTENDANCE</Text>
 
       <Link href="/generate" asChild>
         <TouchableOpacity style={styles.button1}>
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   logo: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
     marginBottom: 20,
   },
   logout: {
