@@ -51,7 +51,7 @@ export default function AuthScreen() {
     >
       <View style={styles.form}>
         <Image
-          source={require('../assets/images/10X_logo.png')}
+          source={require('../assets/images/sqac_logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     color: '#ffa600ff',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     alignSelf: 'center',
     marginBottom: 20,
   },

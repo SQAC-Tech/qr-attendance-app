@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "10X-qr-attendance",
-    "slug": "10X-qr-attendance",
+    "name": "sqac-qr-attendance",
+    "slug": "sqac-qr-attendance",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/10X_logo.png",
+    "icon": "./assets/images/sqac_logo.png",
     "scheme": "qrattendanceapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,19 +13,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/10X_logo.png",
+        "foregroundImage": "./public/icon-192.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
-      "package": "com.thisisjay.sqacqrattendance"
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/10X_logo.png",
+      "favicon": "./public/icon-192.png",
       "name": "QR Attendance",
       "shortName": "QR App",
       "themeColor": "#ffffff",
@@ -38,7 +34,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/10X_logo.png",
+          "image": "./public/icon-192.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -48,12 +44,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "c94ffe68-a58a-4a32-9c8d-3eb3418e3620"
-      }
     }
   }
 }
