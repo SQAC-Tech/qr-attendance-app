@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Image, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Image, Alert ,Card} from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { logout } from './lib/firebaseAuth'; // Adjust the import based on your auth library
 
@@ -22,25 +22,25 @@ export default function HomeScreen() {
 
       <Link href="/generate" asChild>
         <TouchableOpacity style={styles.button1}>
-          <Text style={styles.buttonText}>🎯 Generate QR Code</Text>
+          <Text style={styles.buttonText}>GENERATE QR CODE</Text>
         </TouchableOpacity>
       </Link>
 
       <Link href="/scan" asChild>
         <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText}>📷 Scan QR</Text>
+          <Text style={styles.buttonText}>SCAN QR</Text>
         </TouchableOpacity>
       </Link>
 
       <Link href="/attendance" asChild>
         <TouchableOpacity style={styles.button3}>
-          <Text style={styles.buttonText}>📊 View Attendance</Text>
+          <Text style={styles.buttonText}>VIEW ATTENDANCE</Text>
         </TouchableOpacity>
       </Link>
 
       
       <TouchableOpacity onPress={handleLogout} style={styles.button4}>
-        <Text style={styles.buttonText}>🚪 Logout</Text>
+        <Text style={styles.buttonText}>LOGOUT</Text>
       </TouchableOpacity>
     </View>
   );
@@ -49,7 +49,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1F28',
+    backgroundColor: '#00031cff',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,

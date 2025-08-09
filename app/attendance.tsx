@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import { databases } from './lib/appwrite';
 import { Link } from 'expo-router';
 import { useAttendeeStore } from './store/attendeeStore';
@@ -55,7 +55,11 @@ export default function AttendeesScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}></Text>
+      <Image
+        source={require('../assets/images/sqac_logo.png')}
+        style={{ width: 100, height: 100, alignSelf: 'center', marginBottom: 5 ,marginTop: 30}}
+        resizeMode="contain"
+      />
       <Text style={styles.title}>Attendees List</Text>
       <FlatList
         data={attendees}
@@ -73,8 +77,8 @@ export default function AttendeesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#1E1F28' },
-  title: { fontSize: 24, color: '#fff', marginBottom: 20, textAlign: 'center' },
+  container: { flex: 1, padding: 20, backgroundColor: '#00031cff' },
+  title: { fontSize: 24, color: '#fff', marginBottom: 20, textAlign: 'center' ,fontStyle: 'normal', fontWeight: 'bold'},
   card: {
     backgroundColor: '#2C2F38',
     padding: 15,
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
   },
   details: { color: '#ccc', fontSize: 16, marginTop: 4 },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#ff7b00ff',
     paddingVertical: 16,
     borderRadius: 14,
     marginTop: 16,

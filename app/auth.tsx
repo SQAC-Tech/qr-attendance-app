@@ -103,7 +103,7 @@ export default function AuthScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1F28',
+    backgroundColor: '#00031cff',
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: '#ffa600ff',
+    backgroundColor: '#ff7b00ff',
   },
   buttonText: {
-    color: '#ffa600ff',
+    color: '#ff7b00ff',
   },
   logo: {
     width: 150,

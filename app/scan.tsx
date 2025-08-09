@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Platform, Text, View, StyleSheet, TouchableOpacity , Image } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useAttendeeStore } from './store/attendeeStore';
 import { useRouter } from 'expo-router';
@@ -77,6 +77,11 @@ export default function ScanScreen() {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../assets/images/sqac_logo.png')}
+        style={{ width: 100, height: 100, marginBottom: 5 }}
+      />
+      <Text style={styles.title}>Scan QR Code</Text>
       <View style={[styles.cameraBox, { borderColor: getBorderColor() }]}>
         {Platform.OS === 'web' ? (
           <WebQRScanner onResult={handleScannedData} />
@@ -115,7 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1E1F28',
+    backgroundColor: '#00031cff',
   },
   cameraBox: {
     width: 200,
@@ -163,4 +168,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
+  title: { fontSize: 24, color: '#fff', marginBottom: 20, textAlign: 'center' ,fontStyle: 'normal', fontWeight: 'bold'},
 });
